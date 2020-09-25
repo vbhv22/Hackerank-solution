@@ -1,0 +1,71 @@
+
+import java.util.Scanner;
+
+public class Hackerrankmissingnumber {
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for (int i=0;i<n;i++)
+            arr[i] = sc.nextInt();
+
+        int k = sc.nextInt();
+        int brr[] = new int[k];
+        for (int i=0;i<k;i++)
+            brr[i] = sc.nextInt();
+
+        int maxa = arr[0];
+        for (int i=0;i<n;i++)
+        {
+            if (arr[i]>maxa)
+                maxa = arr[i];
+        }
+        //System.out.println(maxa);
+        int maxb = brr[0];
+        for (int i=0;i<k;i++)
+        {
+            if (brr[i]>maxb)
+                maxb = brr[i];
+        }
+        //System.out.println(maxb);
+        missingnumber(arr,n,brr,k,maxa,maxb);
+    }
+
+    private static void missingnumber(int[] arr, int n, int[] brr, int k, int maxa, int maxb) {
+        int count[] = new int[10001];
+        int count1[] = new int[10001];
+        int temp[] = new int[maxb+1];
+        int i;
+        for (i=0;i<=maxb;i++)
+        {
+            count[i] = 0;
+        }
+
+        for (i=0;i<=maxa;i++)
+        {
+            count1[i] = 0;
+        }
+
+        for (i=0;i<10001;i++)
+        {
+            count[brr[i]]++;
+        }
+        for (i=0;i<10001;i++)
+        {
+            count1[arr[i]]++;
+        }
+        int x = 0;
+        for (i=0;i<=maxb;i++)
+        {
+            if (count[i]!=count1[i])
+            {
+                temp[x] = i;
+                x++;
+            }
+        }
+        for (i=0;i<=maxb;i++) {
+            System.out.println(temp[i]);
+        }
+    }
+}
